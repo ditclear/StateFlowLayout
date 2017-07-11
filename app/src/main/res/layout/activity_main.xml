@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.ditclear.app.MainActivity">
+
+    <com.ditclear.stateflowlayout.StateFlowLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:content_color="@color/colorPrimary"
+            app:content_size="8sp"
+            app:divider="@drawable/divider"
+            app:state_color="@color/colorPrimaryDark"
+            app:state_size="10sp">
+
+        <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_check_circle_black_24dp"
+                android:tag="提交申请"/>
+
+        <ImageView
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:clickable="true"
+                android:contentDescription="申请成功"
+                android:src="@drawable/ic_check_circle_black_24dp"/>
+
+        <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:contentDescription="店家已审核"
+                android:src="@drawable/ic_check_circle_black_24dp"
+                android:tag="待审核"/>
+
+        <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:clickable="false"
+                android:src="@drawable/ic_check_circle_black_24dp"
+                android:tag="待退货"/>
+
+
+        <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_check_circle_black_24dp"
+                android:tag="发货中"
+                android:tint="@android:color/darker_gray"/>
+
+        <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_check_circle_black_24dp"
+                android:tag="完成"
+                android:tint="@android:color/darker_gray"/>
+
+    </com.ditclear.stateflowlayout.StateFlowLayout>
+
+</LinearLayout>

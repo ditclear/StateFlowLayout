@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StateFlowLayout">
+        <attr name="state_color" format="color"/>
+        <attr name="content_color" format="color"/>
+        <attr name="state_size" format="dimension"/>
+        <attr name="content_size" format="dimension"/>
+    </declare-styleable>
+</resources>
