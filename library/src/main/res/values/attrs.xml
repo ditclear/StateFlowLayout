@@ -6,4 +6,10 @@
         <attr name="state_size" format="dimension"/>
         <attr name="content_size" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="NodeImage">
+        <attr name="state" format="string"/>
+        <attr name="child" format="boolean"/>
+        <attr name="next_child" format="boolean"/>
+    </declare-styleable>
 </resources>

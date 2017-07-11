@@ -8,7 +8,7 @@
         tools:context="com.ditclear.app.MainActivity">
 
     <com.ditclear.stateflowlayout.StateFlowLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:content_color="@color/colorPrimary"
             app:content_size="8sp"
@@ -16,47 +16,53 @@
             app:state_color="@color/colorPrimaryDark"
             app:state_size="10sp">
 
-        <ImageView
+        <com.ditclear.stateflowlayout.NodeImage
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_check_circle_black_24dp"
-                android:tag="提交申请"/>
+                android:tag="提交申请"
+                app:child="false"
+                app:next_child="true"/>
 
-        <ImageView
+        <com.ditclear.stateflowlayout.NodeImage
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                android:clickable="true"
                 android:contentDescription="申请成功"
-                android:src="@drawable/ic_check_circle_black_24dp"/>
+                android:src="@drawable/ic_check_circle_black_24dp"
+                app:child="true"
+                app:next_child="false"/>
 
-        <ImageView
+        <com.ditclear.stateflowlayout.NodeImage
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:contentDescription="店家已审核"
                 android:src="@drawable/ic_check_circle_black_24dp"
-                android:tag="待审核"/>
+                android:tag="待审核"
+                app:child="true"/>
 
-        <ImageView
+        <com.ditclear.stateflowlayout.NodeImage
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:clickable="false"
                 android:src="@drawable/ic_check_circle_black_24dp"
-                android:tag="待退货"/>
+                android:tag="待退货"
+                app:child="true"/>
 
 
-        <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+        <com.ditclear.stateflowlayout.NodeImage
+                android:layout_width="10dp"
+                android:layout_height="10dp"
                 android:src="@drawable/ic_check_circle_black_24dp"
                 android:tag="发货中"
-                android:tint="@android:color/darker_gray"/>
+                android:tint="@android:color/darker_gray"
+                app:child="false"/>
 
-        <ImageView
+        <com.ditclear.stateflowlayout.NodeImage
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_check_circle_black_24dp"
                 android:tag="完成"
-                android:tint="@android:color/darker_gray"/>
+                android:tint="@android:color/darker_gray"
+                app:child="false"/>
 
     </com.ditclear.stateflowlayout.StateFlowLayout>
 

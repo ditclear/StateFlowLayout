@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 /**
- * 页面描述：
+ * 页面描述：{@link Node}
  *
  * Created by ditclear on 2017/7/10.
  */
@@ -87,7 +87,16 @@ public class StateFlowLayout extends LinearLayoutCompat {
         }
         super.onFinishInflate();
 
+        for (int i = 0; i < getChildCount(); i++) {
+            View child = getChildAt(i);
+            if (!(child instanceof Node)) {
+                throw new InflateException(child.getClass().getSimpleName()
+                        + "not implement interface Node");
+            }
+        }
+
         setGravity(Gravity.CENTER);
+
 
     }
 
@@ -106,25 +115,40 @@ public class StateFlowLayout extends LinearLayoutCompat {
         }
 
         if (widthMode == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(getMeasuredWidth() - mDividerWidth, getMeasuredHeight());
+            setMeasuredDimension(getMeasuredWidth(), getMeasuredHeight());
         }
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r + mDividerWidth, b);
+        super.onLayout(changed, l, t, r, b);
         if (!showDividerMiddle) {
             return;
         }
+        int childNodeCount = 0;
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
+            Node node = (Node) child;
             int childLeft = child.getLeft();
             int childRight = child.getRight();
             if (hasDividerBeforeChildAt(i)) {
-                childLeft -= child.isClickable() ? mDividerWidth / 2 : mDividerWidth;
-                childRight -= child.isClickable() ? mDividerWidth / 2 : mDividerWidth;
+                if (node.isChild() && i != 0) {
+                    childNodeCount++;
+                }
+                childLeft -= node.isChild() ? mDividerWidth / 2 * childNodeCount
+                        : mDividerWidth / 2 * (childNodeCount + 1);
+                childRight -= node.isChild() ? mDividerWidth / 2 * childNodeCount
+                        : mDividerWidth / 2 * (childNodeCount + 1);
                 child.layout(childLeft, child.getTop(), childRight, child.getBottom());
             }
+        }
+    }
+
+    private int getNodeOffset(Node node, int childCount) {
+        if (node.isNextChild()) {
+            return mDividerWidth / 2 * childCount;
+        } else {
+            return mDividerWidth / 2;
         }
     }
 
@@ -135,10 +159,7 @@ public class StateFlowLayout extends LinearLayoutCompat {
 
         for (int i = 0; i < count; i++) {
             View child = getChildAt(i);
-            View next = null;
-            if (i + 1 < count) {
-                next = getChildAt(i + 1);
-            }
+            Node node = (Node) child;
             if (child instanceof ImageView) {
                 String state = (String) child.getTag();
                 String content = (String) child.getContentDescription();
@@ -155,8 +176,7 @@ public class StateFlowLayout extends LinearLayoutCompat {
                             child.getLeft() - (rect.width() - child.getMeasuredWidth()) / 2,
                             child.getTop() * 0.8f, mContentPaint);
                 }
-                if (getDividerDrawable() == null || !showDividerMiddle
-                        || !(next instanceof ImageView)) {
+                if (getDividerDrawable() == null || !showDividerMiddle) {
                     continue;
                 }
                 final LayoutParams lp = (LayoutParams) child.getLayoutParams();
@@ -167,7 +187,9 @@ public class StateFlowLayout extends LinearLayoutCompat {
                 } else {
                     position = child.getRight() + lp.rightMargin;
                 }
-                drawVerticalDivider(canvas, position, child.isClickable(), next.isClickable());
+                if (i != getChildCount() - 1) {
+                    drawVerticalDivider(canvas, position, node.isChild(), node.isNextChild());
+                }
 
             }
 
