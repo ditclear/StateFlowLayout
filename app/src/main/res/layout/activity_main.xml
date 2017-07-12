@@ -11,8 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:content_color="@color/colorPrimary"
-            app:content_size="8sp"
-            app:divider="@drawable/divider"
+            app:content_size="10sp"
             app:state_color="@color/colorPrimaryDark"
             app:state_size="10sp">
 
@@ -20,49 +19,70 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_check_circle_black_24dp"
-                android:tag="提交申请"
                 app:child="false"
-                app:next_child="true"/>
+                app:state="提交申请"/>
+
+        <View
+                android:layout_width="24dp"
+                android:layout_height="2dp"
+                android:background="@drawable/divider"/>
 
         <com.ditclear.stateflowlayout.NodeImage
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:contentDescription="申请成功"
                 android:src="@drawable/ic_check_circle_black_24dp"
+                app:child="true"/>
+
+        <View
+                android:layout_width="24dp"
+                android:layout_height="2dp"
+                android:background="@drawable/divider"/>
+
+        <com.ditclear.stateflowlayout.NodeImage
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_check_circle_black_24dp"
                 app:child="true"
-                app:next_child="false"/>
+                app:state="待审核"/>
+
+        <View
+                android:layout_width="48dp"
+                android:layout_height="2dp"
+                android:background="@drawable/divider"/>
 
         <com.ditclear.stateflowlayout.NodeImage
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:contentDescription="店家已审核"
                 android:src="@drawable/ic_check_circle_black_24dp"
-                android:tag="待审核"
-                app:child="true"/>
+                app:child="true"
+                app:state="待退货"/>
+
+        <View
+                android:layout_width="48dp"
+                android:layout_height="2dp"
+                android:background="@drawable/divider"/>
 
         <com.ditclear.stateflowlayout.NodeImage
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_check_circle_black_24dp"
-                android:tag="待退货"
-                app:child="true"/>
-
-
-        <com.ditclear.stateflowlayout.NodeImage
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:src="@drawable/ic_check_circle_black_24dp"
-                android:tag="发货中"
                 android:tint="@android:color/darker_gray"
-                app:child="false"/>
+                app:child="false"
+                app:state="发货中"/>
+
+        <View
+                android:layout_width="48dp"
+                android:layout_height="2dp"
+                android:background="@drawable/divider"/>
 
         <com.ditclear.stateflowlayout.NodeImage
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_check_circle_black_24dp"
-                android:tag="完成"
                 android:tint="@android:color/darker_gray"
-                app:child="false"/>
+                app:child="false"
+                app:state="完成"/>
 
     </com.ditclear.stateflowlayout.StateFlowLayout>
 
